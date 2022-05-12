@@ -41,8 +41,9 @@ public class TicketSys extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         homepage = new javax.swing.JPanel();
         homeCreateButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        welcomeBanner = new javax.swing.JLabel();
         viewTicketsButton = new javax.swing.JButton();
+        searchTicketButton = new javax.swing.JButton();
         createPage = new javax.swing.JPanel();
         createTicketHeader = new javax.swing.JLabel();
         clientIdField = new javax.swing.JTextField();
@@ -57,11 +58,36 @@ public class TicketSys extends javax.swing.JFrame {
         emplIdField = new javax.swing.JTextField();
         createHomeButton = new javax.swing.JButton();
         searchPage = new javax.swing.JPanel();
+        searchBanner = new javax.swing.JLabel();
+        ticketNumInputLabel = new javax.swing.JLabel();
+        searchValue = new javax.swing.JTextField();
+        searchSubmitBtn = new javax.swing.JButton();
+        searchHomeButton = new javax.swing.JButton();
         viewTickets = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         viewTicketsTable = new javax.swing.JTable();
         viewTableRefreshButton = new javax.swing.JButton();
         viewTicketsHomeButton = new javax.swing.JButton();
+        editPage = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        editHomeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -79,14 +105,22 @@ public class TicketSys extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel1.setText("Welcome to TicketSys");
+        welcomeBanner.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        welcomeBanner.setText("Welcome to TicketSys");
 
         viewTicketsButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         viewTicketsButton.setText("View Tickets");
         viewTicketsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewTicketsButtonActionPerformed(evt);
+            }
+        });
+
+        searchTicketButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        searchTicketButton.setText("Search Ticket");
+        searchTicketButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTicketButtonActionPerformed(evt);
             }
         });
 
@@ -97,8 +131,9 @@ public class TicketSys extends javax.swing.JFrame {
             .addGroup(homepageLayout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addGroup(homepageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(welcomeBanner)
                     .addGroup(homepageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(searchTicketButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(viewTicketsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(homeCreateButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(718, Short.MAX_VALUE))
@@ -107,12 +142,14 @@ public class TicketSys extends javax.swing.JFrame {
             homepageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homepageLayout.createSequentialGroup()
                 .addGap(100, 100, 100)
-                .addComponent(jLabel1)
+                .addComponent(welcomeBanner)
                 .addGap(70, 70, 70)
                 .addComponent(homeCreateButton)
                 .addGap(18, 18, 18)
                 .addComponent(viewTicketsButton)
-                .addContainerGap(392, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(searchTicketButton)
+                .addContainerGap(336, Short.MAX_VALUE))
         );
 
         mainPanel.add(homepage, "card3");
@@ -134,7 +171,8 @@ public class TicketSys extends javax.swing.JFrame {
         clientIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         clientIdLabel.setText("Client ID:");
 
-        statusSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Open", "Pending", "Resolved", "Canceled" }));
+        statusSelector.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        statusSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Open", "Pending", "Resolved", "Closed" }));
         statusSelector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 statusSelectorActionPerformed(evt);
@@ -199,7 +237,7 @@ public class TicketSys extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addGroup(createPageLayout.createSequentialGroup()
                                 .addComponent(statusLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(statusSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(createPageLayout.createSequentialGroup()
                                 .addComponent(emplIdLabel)
@@ -234,20 +272,58 @@ public class TicketSys extends javax.swing.JFrame {
                 .addComponent(createButton)
                 .addGap(100, 100, 100)
                 .addComponent(createHomeButton)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         mainPanel.add(createPage, "card2");
+
+        searchBanner.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        searchBanner.setText("Search");
+
+        ticketNumInputLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ticketNumInputLabel.setText("Ticket Number:");
+
+        searchSubmitBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        searchSubmitBtn.setText("Submit");
+
+        searchHomeButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        searchHomeButton.setText("Home");
+        searchHomeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchHomeButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout searchPageLayout = new javax.swing.GroupLayout(searchPage);
         searchPage.setLayout(searchPageLayout);
         searchPageLayout.setHorizontalGroup(
             searchPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1280, Short.MAX_VALUE)
+            .addGroup(searchPageLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addGroup(searchPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(searchHomeButton)
+                    .addComponent(searchSubmitBtn)
+                    .addGroup(searchPageLayout.createSequentialGroup()
+                        .addComponent(ticketNumInputLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchBanner))
+                .addContainerGap(952, Short.MAX_VALUE))
         );
         searchPageLayout.setVerticalGroup(
             searchPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGroup(searchPageLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addComponent(searchBanner)
+                .addGap(18, 18, 18)
+                .addGroup(searchPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ticketNumInputLabel)
+                    .addComponent(searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(searchSubmitBtn)
+                .addGap(100, 100, 100)
+                .addComponent(searchHomeButton)
+                .addContainerGap(354, Short.MAX_VALUE))
         );
 
         mainPanel.add(searchPage, "card4");
@@ -321,6 +397,168 @@ public class TicketSys extends javax.swing.JFrame {
         );
 
         mainPanel.add(viewTickets, "card5");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Ticket Number:");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setText("Date Created:");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setText("jLabel5");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setText("Client:");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setText("jLabel7");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel8.setText("jLabel8");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("Created By:");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel9.setText("jLabel9");
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel10.setText("Request:");
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel11.setText("jLabel11");
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel12.setText("Notes:");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Created By", "Date Created", "Note"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextField1.setText("jTextField1");
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton1.setText("Add Note");
+
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Open", "Pending", "Resolved", "Closed" }));
+
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton2.setText("Save Status");
+
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 0, 0));
+        jButton3.setText("Delete");
+
+        editHomeButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        editHomeButton.setText("Back");
+        editHomeButton.setToolTipText("");
+        editHomeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editHomeButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout editPageLayout = new javax.swing.GroupLayout(editPage);
+        editPage.setLayout(editPageLayout);
+        editPageLayout.setHorizontalGroup(
+            editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editPageLayout.createSequentialGroup()
+                .addGap(138, 138, 138)
+                .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel12)
+                        .addGroup(editPageLayout.createSequentialGroup()
+                            .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel10))
+                            .addGap(25, 25, 25)
+                            .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel11)
+                                .addComponent(jLabel9)
+                                .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8))))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(editPageLayout.createSequentialGroup()
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(editPageLayout.createSequentialGroup()
+                        .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(editHomeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(392, Short.MAX_VALUE))
+        );
+        editPageLayout.setVerticalGroup(
+            editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editPageLayout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addGap(75, 75, 75)
+                .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(editHomeButton))
+                .addContainerGap(195, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(editPage, "card6");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -496,6 +734,27 @@ public class TicketSys extends javax.swing.JFrame {
         mainPanel.revalidate();
     }//GEN-LAST:event_viewTicketsButtonActionPerformed
 
+    private void searchHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchHomeButtonActionPerformed
+        mainPanel.removeAll();
+        mainPanel.add(homepage);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+    }//GEN-LAST:event_searchHomeButtonActionPerformed
+
+    private void searchTicketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTicketButtonActionPerformed
+        mainPanel.removeAll();
+        mainPanel.add(searchPage);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+    }//GEN-LAST:event_searchTicketButtonActionPerformed
+
+    private void editHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editHomeButtonActionPerformed
+        mainPanel.removeAll();
+        mainPanel.add(searchPage);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+    }//GEN-LAST:event_editHomeButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -539,23 +798,49 @@ public class TicketSys extends javax.swing.JFrame {
     private javax.swing.JButton createHomeButton;
     private javax.swing.JPanel createPage;
     private javax.swing.JLabel createTicketHeader;
+    private javax.swing.JButton editHomeButton;
+    private javax.swing.JPanel editPage;
     private javax.swing.JTextField emplIdField;
     private javax.swing.JLabel emplIdLabel;
     private javax.swing.JButton homeCreateButton;
     private javax.swing.JPanel homepage;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTextArea requestDetail;
     private javax.swing.JScrollPane requestDetailPane;
+    private javax.swing.JLabel searchBanner;
+    private javax.swing.JButton searchHomeButton;
     private javax.swing.JPanel searchPage;
+    private javax.swing.JButton searchSubmitBtn;
+    private javax.swing.JButton searchTicketButton;
+    private javax.swing.JTextField searchValue;
     private javax.swing.JLabel statusLabel;
     private javax.swing.JComboBox<String> statusSelector;
+    private javax.swing.JLabel ticketNumInputLabel;
     private javax.swing.JButton viewTableRefreshButton;
     private javax.swing.JPanel viewTickets;
     private javax.swing.JButton viewTicketsButton;
     private javax.swing.JButton viewTicketsHomeButton;
     private javax.swing.JTable viewTicketsTable;
+    private javax.swing.JLabel welcomeBanner;
     // End of variables declaration//GEN-END:variables
 }
