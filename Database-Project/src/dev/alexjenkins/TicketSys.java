@@ -86,7 +86,7 @@ public class TicketSys extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         dynamicStatusBox = new javax.swing.JComboBox<>();
         editSaveStatus = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
         editHomeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -483,12 +483,12 @@ public class TicketSys extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 0, 0));
-        jButton3.setText("Delete");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        deleteButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        deleteButton.setForeground(new java.awt.Color(255, 0, 0));
+        deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                deleteButtonActionPerformed(evt);
             }
         });
 
@@ -536,7 +536,7 @@ public class TicketSys extends javax.swing.JFrame {
                             .addComponent(editHomeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(deleteButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(editSaveStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(437, Short.MAX_VALUE))
         );
@@ -577,7 +577,7 @@ public class TicketSys extends javax.swing.JFrame {
                     .addComponent(editSaveStatus))
                 .addGap(75, 75, 75)
                 .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(deleteButton)
                     .addComponent(editHomeButton))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
@@ -979,9 +979,41 @@ public class TicketSys extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_editSaveStatusActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        mainPanel.removeAll();
+        mainPanel.add(viewTickets);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+        
+        // connect to database and retrieve info
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        
+        // creds for database
+        final String id = "ajenki21";
+        final String pw = "COSC*l270l";
+        
+        // for local computer only
+        final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        
+        // use for submissions
+        // final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        
+        try {
+            Connection con = DriverManager.getConnection(server, id, pw);
+            Statement statement = con.createStatement();
+            
+            // delete ticket
+            statement.executeUpdate("delete from ajenki21db.ticket where ticketNum = " + dynamicTicketNum.getText());
+        }         
+        catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1026,6 +1058,7 @@ public class TicketSys extends javax.swing.JFrame {
     private javax.swing.JButton createHomeButton;
     private javax.swing.JPanel createPage;
     private javax.swing.JLabel createTicketHeader;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JLabel dynamicClientLabel;
     private javax.swing.JLabel dynamicCreatedByLabel;
     private javax.swing.JLabel dynamicCreatedLabel;
@@ -1041,7 +1074,6 @@ public class TicketSys extends javax.swing.JFrame {
     private javax.swing.JButton homeCreateButton;
     private javax.swing.JPanel homepage;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
