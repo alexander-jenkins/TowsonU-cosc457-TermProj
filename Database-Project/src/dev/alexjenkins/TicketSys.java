@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -38,6 +39,10 @@ public class TicketSys extends javax.swing.JFrame {
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
+        homepage = new javax.swing.JPanel();
+        homeCreateButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        viewTicketsButton = new javax.swing.JButton();
         createPage = new javax.swing.JPanel();
         createTicketHeader = new javax.swing.JLabel();
         clientIdField = new javax.swing.JTextField();
@@ -50,6 +55,13 @@ public class TicketSys extends javax.swing.JFrame {
         createButton = new javax.swing.JButton();
         emplIdLabel = new javax.swing.JLabel();
         emplIdField = new javax.swing.JTextField();
+        createHomeButton = new javax.swing.JButton();
+        searchPage = new javax.swing.JPanel();
+        viewTickets = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        viewTicketsTable = new javax.swing.JTable();
+        viewTableRefreshButton = new javax.swing.JButton();
+        viewTicketsHomeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -58,6 +70,52 @@ public class TicketSys extends javax.swing.JFrame {
         mainPanel.setMaximumSize(new java.awt.Dimension(1280, 720));
         mainPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
         mainPanel.setLayout(new java.awt.CardLayout());
+
+        homeCreateButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        homeCreateButton.setText("Create a Ticket");
+        homeCreateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homeCreateButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel1.setText("Welcome to TicketSys");
+
+        viewTicketsButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        viewTicketsButton.setText("View Tickets");
+        viewTicketsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewTicketsButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout homepageLayout = new javax.swing.GroupLayout(homepage);
+        homepage.setLayout(homepageLayout);
+        homepageLayout.setHorizontalGroup(
+            homepageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homepageLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addGroup(homepageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(homepageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(viewTicketsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(homeCreateButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(718, Short.MAX_VALUE))
+        );
+        homepageLayout.setVerticalGroup(
+            homepageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homepageLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addComponent(jLabel1)
+                .addGap(70, 70, 70)
+                .addComponent(homeCreateButton)
+                .addGap(18, 18, 18)
+                .addComponent(viewTicketsButton)
+                .addContainerGap(392, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(homepage, "card3");
 
         createPage.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         createPage.setPreferredSize(new java.awt.Dimension(1280, 720));
@@ -110,6 +168,14 @@ public class TicketSys extends javax.swing.JFrame {
             }
         });
 
+        createHomeButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        createHomeButton.setText("Home");
+        createHomeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createHomeButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout createPageLayout = new javax.swing.GroupLayout(createPage);
         createPage.setLayout(createPageLayout);
         createPageLayout.setHorizontalGroup(
@@ -127,6 +193,7 @@ public class TicketSys extends javax.swing.JFrame {
                         .addGap(238, 995, Short.MAX_VALUE))
                     .addGroup(createPageLayout.createSequentialGroup()
                         .addGroup(createPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(createHomeButton)
                             .addComponent(createButton)
                             .addComponent(requestDetailPane, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
@@ -165,10 +232,95 @@ public class TicketSys extends javax.swing.JFrame {
                     .addComponent(statusSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(createButton)
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addGap(100, 100, 100)
+                .addComponent(createHomeButton)
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         mainPanel.add(createPage, "card2");
+
+        javax.swing.GroupLayout searchPageLayout = new javax.swing.GroupLayout(searchPage);
+        searchPage.setLayout(searchPageLayout);
+        searchPageLayout.setHorizontalGroup(
+            searchPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1280, Short.MAX_VALUE)
+        );
+        searchPageLayout.setVerticalGroup(
+            searchPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 720, Short.MAX_VALUE)
+        );
+
+        mainPanel.add(searchPage, "card4");
+
+        viewTicketsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Ticket Number", "Client ID", "Creator ID", "Request Detail", "Status", "Date Created"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(viewTicketsTable);
+
+        viewTableRefreshButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        viewTableRefreshButton.setText("Refresh Table");
+        viewTableRefreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewTableRefreshButtonActionPerformed(evt);
+            }
+        });
+
+        viewTicketsHomeButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        viewTicketsHomeButton.setText("Home");
+        viewTicketsHomeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewTicketsHomeButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout viewTicketsLayout = new javax.swing.GroupLayout(viewTickets);
+        viewTickets.setLayout(viewTicketsLayout);
+        viewTicketsLayout.setHorizontalGroup(
+            viewTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewTicketsLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addGroup(viewTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(viewTicketsHomeButton)
+                    .addComponent(viewTableRefreshButton)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(100, Short.MAX_VALUE))
+        );
+        viewTicketsLayout.setVerticalGroup(
+            viewTicketsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewTicketsLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(viewTableRefreshButton)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(viewTicketsHomeButton)
+                .addContainerGap(84, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(viewTickets, "card5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -265,6 +417,85 @@ public class TicketSys extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_emplIdFieldActionPerformed
 
+    private void createHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createHomeButtonActionPerformed
+        mainPanel.removeAll();
+        mainPanel.add(homepage);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+    }//GEN-LAST:event_createHomeButtonActionPerformed
+
+    private void homeCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeCreateButtonActionPerformed
+        mainPanel.removeAll();
+        mainPanel.add(createPage);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+    }//GEN-LAST:event_homeCreateButtonActionPerformed
+
+    private void viewTableRefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTableRefreshButtonActionPerformed
+        // TODO add your handling code here:
+        
+        // set up database
+        // check if jdbc exists
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        
+        // creds for database
+        final String id = "ajenki21";
+        final String pw = "COSC*l270l";
+        
+        // for local computer only
+        final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        
+        // use for submissions
+        // final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        
+        // connect to databse     
+        try {
+            Connection con = DriverManager.getConnection(server, id, pw);
+            Statement statement = con.createStatement();
+            
+            // fetch the tickets 
+            ResultSet rs = statement.executeQuery("select * from ajenki21db.ticket");
+            
+            // populate the model
+            DefaultTableModel model = new DefaultTableModel(new String[]{"Ticket Number", "Client ID", "Creator ID", "Request", "Status", "Date Created"}, 0);
+            while (rs.next()) {
+                String a = rs.getString("ticketNum");
+                String b = rs.getString("client");
+                String c = rs.getString("createdBy");
+                String d = rs.getString("request");
+                String e = rs.getString("status");
+                String date = rs.getString("createDate");
+                String time = rs.getString("createTime");
+                String dt = date + " " + time;
+                model.addRow(new Object[]{a, b, c, d, e, dt});
+            }
+            
+            // apply model
+            viewTicketsTable.setModel(model);
+        }         
+        catch (SQLException ex) {
+            System.err.println(ex);
+        }
+    }//GEN-LAST:event_viewTableRefreshButtonActionPerformed
+
+    private void viewTicketsHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTicketsHomeButtonActionPerformed
+        mainPanel.removeAll();
+        mainPanel.add(homepage);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+    }//GEN-LAST:event_viewTicketsHomeButtonActionPerformed
+
+    private void viewTicketsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTicketsButtonActionPerformed
+        mainPanel.removeAll();
+        mainPanel.add(viewTickets);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+    }//GEN-LAST:event_viewTicketsButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -305,15 +536,26 @@ public class TicketSys extends javax.swing.JFrame {
     private javax.swing.JTextField clientIdField;
     private javax.swing.JLabel clientIdLabel;
     private javax.swing.JButton createButton;
+    private javax.swing.JButton createHomeButton;
     private javax.swing.JPanel createPage;
     private javax.swing.JLabel createTicketHeader;
     private javax.swing.JTextField emplIdField;
     private javax.swing.JLabel emplIdLabel;
+    private javax.swing.JButton homeCreateButton;
+    private javax.swing.JPanel homepage;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTextArea requestDetail;
     private javax.swing.JScrollPane requestDetailPane;
+    private javax.swing.JPanel searchPage;
     private javax.swing.JLabel statusLabel;
     private javax.swing.JComboBox<String> statusSelector;
+    private javax.swing.JButton viewTableRefreshButton;
+    private javax.swing.JPanel viewTickets;
+    private javax.swing.JButton viewTicketsButton;
+    private javax.swing.JButton viewTicketsHomeButton;
+    private javax.swing.JTable viewTicketsTable;
     // End of variables declaration//GEN-END:variables
 }
