@@ -71,21 +71,21 @@ public class TicketSys extends javax.swing.JFrame {
         editPage = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        dynamicClientLabel = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        dynamicTicketNum = new javax.swing.JLabel();
+        dynamicCreatedLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        dynamicCreatedByLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        dynamicRequestLabel = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        editNotesTable = new javax.swing.JTable();
+        noteInputField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        dynamicStatusBox = new javax.swing.JComboBox<>();
+        editSaveStatus = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         editHomeButton = new javax.swing.JButton();
 
@@ -172,7 +172,7 @@ public class TicketSys extends javax.swing.JFrame {
         clientIdLabel.setText("Client ID:");
 
         statusSelector.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        statusSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Open", "Pending", "Resolved", "Closed" }));
+        statusSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Open", "Pending", "Resolved" }));
         statusSelector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 statusSelectorActionPerformed(evt);
@@ -285,6 +285,11 @@ public class TicketSys extends javax.swing.JFrame {
 
         searchSubmitBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         searchSubmitBtn.setText("Submit");
+        searchSubmitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchSubmitBtnActionPerformed(evt);
+            }
+        });
 
         searchHomeButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         searchHomeButton.setText("Home");
@@ -404,34 +409,34 @@ public class TicketSys extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Date Created:");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel5.setText("jLabel5");
+        dynamicClientLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dynamicClientLabel.setText("jLabel5");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Client:");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel7.setText("jLabel7");
+        dynamicTicketNum.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dynamicTicketNum.setText("jLabel7");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel8.setText("jLabel8");
+        dynamicCreatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dynamicCreatedLabel.setText("jLabel8");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Created By:");
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel9.setText("jLabel9");
+        dynamicCreatedByLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dynamicCreatedByLabel.setText("jLabel9");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel10.setText("Request:");
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel11.setText("jLabel11");
+        dynamicRequestLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dynamicRequestLabel.setText("jLabel11");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel12.setText("Notes:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        editNotesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -450,23 +455,42 @@ public class TicketSys extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(editNotesTable);
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField1.setText("jTextField1");
+        noteInputField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton1.setText("Add Note");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Open", "Pending", "Resolved", "Closed" }));
+        dynamicStatusBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dynamicStatusBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Open", "Pending", "Resolved" }));
+        dynamicStatusBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dynamicStatusBoxActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton2.setText("Save Status");
+        editSaveStatus.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        editSaveStatus.setText("Save Status");
+        editSaveStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editSaveStatusActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 0, 0));
         jButton3.setText("Delete");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         editHomeButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         editHomeButton.setText("Back");
@@ -495,26 +519,26 @@ public class TicketSys extends javax.swing.JFrame {
                                 .addComponent(jLabel10))
                             .addGap(25, 25, 25)
                             .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel11)
-                                .addComponent(jLabel9)
+                                .addComponent(dynamicRequestLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8))))
+                                    .addComponent(dynamicCreatedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dynamicClientLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dynamicTicketNum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(dynamicCreatedByLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(editPageLayout.createSequentialGroup()
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(noteInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(editPageLayout.createSequentialGroup()
                         .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dynamicStatusBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(editHomeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(392, Short.MAX_VALUE))
+                            .addComponent(editSaveStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(437, Short.MAX_VALUE))
         );
         editPageLayout.setVerticalGroup(
             editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -522,23 +546,23 @@ public class TicketSys extends javax.swing.JFrame {
                 .addGap(73, 73, 73)
                 .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel7))
+                    .addComponent(dynamicTicketNum))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel5))
+                    .addComponent(dynamicClientLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel8))
+                    .addComponent(dynamicCreatedLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel9))
+                    .addComponent(dynamicCreatedByLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel11))
+                    .addComponent(dynamicRequestLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -546,16 +570,16 @@ public class TicketSys extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                    .addComponent(noteInputField))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(dynamicStatusBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editSaveStatus))
                 .addGap(75, 75, 75)
                 .addGroup(editPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(editHomeButton))
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         mainPanel.add(editPage, "card6");
@@ -755,6 +779,210 @@ public class TicketSys extends javax.swing.JFrame {
         mainPanel.revalidate();
     }//GEN-LAST:event_editHomeButtonActionPerformed
 
+    private void searchSubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchSubmitBtnActionPerformed
+        mainPanel.removeAll();
+        mainPanel.add(editPage);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+        
+        // gather info for update of the edit page
+        String searchVal = searchValue.getText();
+        searchValue.setText(null);
+       
+        // connect to database and retrieve info
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        
+        // creds for database
+        final String id = "ajenki21";
+        final String pw = "COSC*l270l";
+        
+        // for local computer only
+        final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        
+        // use for submissions
+        // final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        
+        try {
+            Connection con = DriverManager.getConnection(server, id, pw);
+            Statement statement = con.createStatement();
+            
+            // fetch the tickets 
+            ResultSet rs = statement.executeQuery("select * from ajenki21db.note where ticketID = " + searchVal);
+            
+            // populate the model
+            DefaultTableModel model = new DefaultTableModel(new String[]{"Created By", "Date Created", "Note"}, 0);
+            while (rs.next()) {
+                String a = rs.getString("createdBy");
+                String b = rs.getString("message");
+                String date = rs.getString("createDate");
+                String time = rs.getString("createTime");
+                String dt = date + " " + time;
+                model.addRow(new Object[]{a, dt, b});
+            }
+            
+            // apply model
+            editNotesTable.setModel(model);
+            
+            
+        }         
+        catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        
+        try {
+            Connection con = DriverManager.getConnection(server, id, pw);
+            Statement statement = con.createStatement();
+            
+            // fetch the tickets 
+            ResultSet rs = statement.executeQuery("select * from ajenki21db.ticket where ticketNum = " + searchVal);
+            while (rs.next()) {
+                dynamicTicketNum.setText(rs.getString("ticketNum"));
+                dynamicClientLabel.setText(rs.getString("client"));
+                dynamicCreatedByLabel.setText(rs.getString("createdBy"));
+                String date = rs.getString("createDate");
+                String time = rs.getString("createTime");
+                dynamicCreatedLabel.setText(date + " " + time);
+                dynamicRequestLabel.setText(rs.getString("request"));
+                dynamicStatusBox.setSelectedItem(rs.getString("status"));
+            }
+        }         
+        catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        
+    }//GEN-LAST:event_searchSubmitBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // gather required info
+        String message = noteInputField.getText();
+        String ticket = dynamicTicketNum.getText();
+        String createdBy = dynamicCreatedByLabel.getText();
+        
+        // gather date
+        LocalDate dateObj = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyy-MM-dd");
+        String createDate = dateObj.format(formatter);
+        
+        // gather time
+        LocalDateTime timeObj = LocalDateTime.now();
+        formatter = DateTimeFormatter.ofPattern("hh:mm:ss");
+        String createTime = timeObj.format(formatter);
+        
+        // set up database
+        // check if jdbc exists
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        
+        // creds for database
+        final String id = "ajenki21";
+        final String pw = "COSC*l270l";
+        
+        // for local computer only
+        final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        
+        // use for submissions
+        // final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        
+        // connect to databse     
+        try {
+            Connection con = DriverManager.getConnection(server, id, pw);
+            Statement statement = con.createStatement();
+            
+            // create the instert statement
+            String insert = String.format("INSERT into ajenki21db.note (ticketID, createdBy, createDate, createTime, message) "
+                    + "values (%d, %d, '%s', '%s', '%s')", Integer.parseInt(ticket), Integer.parseInt(createdBy), createDate, createTime, message);
+            
+            // execute statement
+            statement.executeUpdate(insert);
+        }         
+        catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        
+        try {
+            Connection con = DriverManager.getConnection(server, id, pw);
+            Statement statement = con.createStatement();
+            
+            // fetch the tickets 
+            ResultSet rs = statement.executeQuery("select * from ajenki21db.note where ticketID = " + ticket);
+            
+            // populate the model
+            DefaultTableModel model = new DefaultTableModel(new String[]{"Created By", "Date Created", "Note"}, 0);
+            while (rs.next()) {
+                String a = rs.getString("createdBy");
+                String b = rs.getString("message");
+                String date = rs.getString("createDate");
+                String time = rs.getString("createTime");
+                String dt = date + " " + time;
+                model.addRow(new Object[]{a, dt, b});
+            }
+            
+            // apply model
+            editNotesTable.setModel(model);
+            
+            
+        }         
+        catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        
+        noteInputField.setText(null);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void dynamicStatusBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dynamicStatusBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dynamicStatusBoxActionPerformed
+
+    private void editSaveStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSaveStatusActionPerformed
+        // get new info
+        String ticket = dynamicTicketNum.getText();
+        String newStatus = String.valueOf(dynamicStatusBox.getSelectedItem());
+        
+        // set up database
+        // check if jdbc exists
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        
+        // creds for database
+        final String id = "ajenki21";
+        final String pw = "COSC*l270l";
+        
+        // for local computer only
+        final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        
+        // use for submissions
+        // final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        
+        // connect to databse     
+        try {
+            Connection con = DriverManager.getConnection(server, id, pw);
+            Statement statement = con.createStatement();
+            
+            // create the instert statement
+            String update = String.format("update ajenki21db.ticket set status = '" + newStatus + "' where ticketNum = " + ticket);
+            
+            // execute statement
+            statement.executeUpdate(update);
+        }         
+        catch (SQLException ex) {
+            System.err.println(ex);
+        }
+    }//GEN-LAST:event_editSaveStatusActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -798,33 +1026,33 @@ public class TicketSys extends javax.swing.JFrame {
     private javax.swing.JButton createHomeButton;
     private javax.swing.JPanel createPage;
     private javax.swing.JLabel createTicketHeader;
+    private javax.swing.JLabel dynamicClientLabel;
+    private javax.swing.JLabel dynamicCreatedByLabel;
+    private javax.swing.JLabel dynamicCreatedLabel;
+    private javax.swing.JLabel dynamicRequestLabel;
+    private javax.swing.JComboBox<String> dynamicStatusBox;
+    private javax.swing.JLabel dynamicTicketNum;
     private javax.swing.JButton editHomeButton;
+    private javax.swing.JTable editNotesTable;
     private javax.swing.JPanel editPage;
+    private javax.swing.JButton editSaveStatus;
     private javax.swing.JTextField emplIdField;
     private javax.swing.JLabel emplIdLabel;
     private javax.swing.JButton homeCreateButton;
     private javax.swing.JPanel homepage;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JTextField noteInputField;
     private javax.swing.JTextArea requestDetail;
     private javax.swing.JScrollPane requestDetailPane;
     private javax.swing.JLabel searchBanner;
