@@ -11,6 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -35,30 +38,232 @@ public class TicketSys extends javax.swing.JFrame {
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
+        createPage = new javax.swing.JPanel();
+        createTicketHeader = new javax.swing.JLabel();
+        clientIdField = new javax.swing.JTextField();
+        clientIdLabel = new javax.swing.JLabel();
+        statusSelector = new javax.swing.JComboBox<>();
+        statusLabel = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        requestDetailPane = new javax.swing.JScrollPane();
+        requestDetail = new javax.swing.JTextArea();
+        createButton = new javax.swing.JButton();
+        emplIdLabel = new javax.swing.JLabel();
+        emplIdField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1280, 720));
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
 
         mainPanel.setMaximumSize(new java.awt.Dimension(1280, 720));
         mainPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
         mainPanel.setLayout(new java.awt.CardLayout());
 
+        createPage.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        createPage.setPreferredSize(new java.awt.Dimension(1280, 720));
+        createPage.setRequestFocusEnabled(false);
+
+        createTicketHeader.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        createTicketHeader.setText("Create a Ticket");
+        createTicketHeader.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        clientIdField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientIdFieldActionPerformed(evt);
+            }
+        });
+
+        clientIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        clientIdLabel.setText("Client ID:");
+
+        statusSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Open", "Pending", "Resolved", "Canceled" }));
+        statusSelector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statusSelectorActionPerformed(evt);
+            }
+        });
+
+        statusLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        statusLabel.setText("Ticket Status:");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setText("Request Detail:");
+
+        requestDetail.setColumns(20);
+        requestDetail.setRows(5);
+        requestDetailPane.setViewportView(requestDetail);
+
+        createButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        createButton.setText("Create Ticket");
+        createButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createButtonActionPerformed(evt);
+            }
+        });
+
+        emplIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        emplIdLabel.setText("Empl ID:");
+
+        emplIdField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emplIdFieldActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout createPageLayout = new javax.swing.GroupLayout(createPage);
+        createPage.setLayout(createPageLayout);
+        createPageLayout.setHorizontalGroup(
+            createPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createPageLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(createPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(createPageLayout.createSequentialGroup()
+                        .addGroup(createPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(createPageLayout.createSequentialGroup()
+                                .addComponent(clientIdLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(clientIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(createTicketHeader))
+                        .addGap(238, 995, Short.MAX_VALUE))
+                    .addGroup(createPageLayout.createSequentialGroup()
+                        .addGroup(createPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(createButton)
+                            .addComponent(requestDetailPane, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addGroup(createPageLayout.createSequentialGroup()
+                                .addComponent(statusLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(statusSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(createPageLayout.createSequentialGroup()
+                                .addComponent(emplIdLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(emplIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        createPageLayout.setVerticalGroup(
+            createPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createPageLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(createTicketHeader)
+                .addGap(40, 40, 40)
+                .addGroup(createPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(clientIdLabel)
+                    .addGroup(createPageLayout.createSequentialGroup()
+                        .addComponent(clientIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)))
+                .addGap(18, 18, 18)
+                .addGroup(createPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(emplIdLabel)
+                    .addComponent(emplIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(requestDetailPane, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(createPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(statusLabel)
+                    .addComponent(statusSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(createButton)
+                .addContainerGap(218, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(createPage, "card2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void clientIdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientIdFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clientIdFieldActionPerformed
+
+    private void statusSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusSelectorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_statusSelectorActionPerformed
+
+    private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
+        // TODO maybe add error handling!
+        
+        // store the info and clear the fields
+        int clientId = Integer.parseInt(clientIdField.getText());
+        clientIdField.setText(null);
+        int creatorId = Integer.parseInt(emplIdField.getText());
+        emplIdField.setText(null);
+        String request = requestDetail.getText();
+        requestDetail.setText(null);
+        String status = String.valueOf(statusSelector.getSelectedItem());
+        statusSelector.setSelectedIndex(0);
+        
+        // gather date
+        LocalDate dateObj = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyy-MM-dd");
+        String createDate = dateObj.format(formatter);
+        
+        // gather time
+        LocalDateTime timeObj = LocalDateTime.now();
+        formatter = DateTimeFormatter.ofPattern("hh:mm:ss");
+        String createTime = timeObj.format(formatter);
+        
+        // set up database
+        // check if jdbc exists
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        
+        // creds for database
+        final String id = "ajenki21";
+        final String pw = "COSC*l270l";
+        
+        // for local computer only
+        final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        
+        // use for submissions
+        // final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        
+        // connect to databse     
+        try {
+            Connection con = DriverManager.getConnection(server, id, pw);
+            Statement statement = con.createStatement();
+            
+            // create the instert statement
+            String insert = String.format("INSERT into ajenki21db.ticket (client, createdBy, createDate, createTime, status, request) "
+                    + "values (%d, %d, '%s', '%s', '%s', '%s')", clientId, creatorId, createDate, createTime, status, request);
+            
+            // execute statement
+            statement.executeUpdate(insert);
+        }         
+        catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        
+        
+        // output values
+        System.out.printf("Created Ticket:%nCID: %d%nCreated By: %s%nRequest: %s%nStatus: %s%nDate: %s%nTime: %s%n", clientId, creatorId, request, status, createDate, createTime);
+    }//GEN-LAST:event_createButtonActionPerformed
+
+    private void emplIdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emplIdFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emplIdFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -94,34 +299,21 @@ public class TicketSys extends javax.swing.JFrame {
             }
         });
         
-        
-        // check if jdbc exists
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println(e);
-        }
-        
-        // creds for database
-        final String id = "ajenki21";
-        final String pw = "COSC*l270l";
-        
-        // for local computer only
-        final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
-        
-        // use for submissions
-        // final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
-        
-        // connect to databse     
-        try {
-            Connection con = DriverManager.getConnection(server, id, pw);
-        }         
-        catch (SQLException ex) {
-            System.err.println(ex);
-        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField clientIdField;
+    private javax.swing.JLabel clientIdLabel;
+    private javax.swing.JButton createButton;
+    private javax.swing.JPanel createPage;
+    private javax.swing.JLabel createTicketHeader;
+    private javax.swing.JTextField emplIdField;
+    private javax.swing.JLabel emplIdLabel;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JTextArea requestDetail;
+    private javax.swing.JScrollPane requestDetailPane;
+    private javax.swing.JLabel statusLabel;
+    private javax.swing.JComboBox<String> statusSelector;
     // End of variables declaration//GEN-END:variables
 }
