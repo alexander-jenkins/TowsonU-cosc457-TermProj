@@ -649,10 +649,10 @@ public class TicketSys extends javax.swing.JFrame {
         final String pw = "COSC*l270l";
         
         // for local computer only
-        final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        // final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
         
         // use for submissions
-        // final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
         
         // connect to databse     
         try {
@@ -709,10 +709,10 @@ public class TicketSys extends javax.swing.JFrame {
         final String pw = "COSC*l270l";
         
         // for local computer only
-        final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        // final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
         
         // use for submissions
-        // final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
         
         // connect to databse     
         try {
@@ -801,10 +801,10 @@ public class TicketSys extends javax.swing.JFrame {
         final String pw = "COSC*l270l";
         
         // for local computer only
-        final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        // final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
         
         // use for submissions
-        // final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
         
         try {
             Connection con = DriverManager.getConnection(server, id, pw);
@@ -885,10 +885,10 @@ public class TicketSys extends javax.swing.JFrame {
         final String pw = "COSC*l270l";
         
         // for local computer only
-        final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        // final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
         
         // use for submissions
-        // final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
         
         // connect to databse     
         try {
@@ -958,10 +958,10 @@ public class TicketSys extends javax.swing.JFrame {
         final String pw = "COSC*l270l";
         
         // for local computer only
-        final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        // final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
         
         // use for submissions
-        // final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
         
         // connect to databse     
         try {
@@ -997,10 +997,10 @@ public class TicketSys extends javax.swing.JFrame {
         final String pw = "COSC*l270l";
         
         // for local computer only
-        final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        // final String server = "jdbc:mysql://localhost:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
         
         // use for submissions
-        // final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
+        final String server = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/ajenki21db?useSSL=false";
         
         try {
             Connection con = DriverManager.getConnection(server, id, pw);
